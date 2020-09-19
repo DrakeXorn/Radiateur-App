@@ -11,9 +11,11 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Vector;
 
 public class UsersPanel extends JPanel {
     private JScrollPane scrollPane;
@@ -62,9 +64,8 @@ public class UsersPanel extends JPanel {
     public ArrayList<User> getSelectedItems() {
         ArrayList<User> users = new ArrayList<>();
 
-        for (int index : listSelect.getSelectedIndices()) {
-            users.add(model.getRow(index));
-        }
+        for (int index : listSelect.getSelectedIndices())
+            users.add(model.getRow(usersTable.getRowSorter().convertRowIndexToView(index)));
 
         return users;
     }
