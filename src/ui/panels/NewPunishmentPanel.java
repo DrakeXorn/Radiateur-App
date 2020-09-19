@@ -72,9 +72,7 @@ public class NewPunishmentPanel extends JPanel {
     }
 
     private class PunishmentTypeBoxListener implements ActionListener {
-        private PunishmentTypeBoxListener() {
-        }
-
+        @Override
         public void actionPerformed(ActionEvent e) {
             timeRequiredBox.setEnabled(isPunishmentTemporary());
             timeRequiredBox.setSelectedIndex(0);
@@ -84,17 +82,17 @@ public class NewPunishmentPanel extends JPanel {
     private class ConfirmButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            Punishment punishment = new Punishment((String)NewPunishmentPanel.this.punishmentTypeBox.getSelectedItem(), reasonArea.getText(), new Date(), new Date(-1L));
+            Punishment punishment = new Punishment((String)punishmentTypeBox.getSelectedItem(), reasonArea.getText(), new Date(), new Date(-1L));
             punishment.setIsNewlyCreated();
-            if (NewPunishmentPanel.this.isPunishmentTemporary()) {
+            if (isPunishmentTemporary()) {
                 LocalDateTime punishmentEndDate = LocalDateTime.now().plusMinutes(NewPunishmentPanel.NUMERIC_REPRESENTATIONS[timeRequiredBox.getSelectedIndex()]);
                 punishment.setPunishmentEndTime(Date.from(punishmentEndDate.atZone(ZoneId.systemDefault()).toInstant()));
             }
 
-            NewPunishmentPanel.this.parent.getParent().getPlayer().addPunishment(punishment);
-            NewPunishmentPanel.this.parent.getParent().addPunishment(punishment);
-            NewPunishmentPanel.this.parent.getParent().repaint();
-            NewPunishmentPanel.this.parent.dispose();
+            parent.getParent().getPlayer().addPunishment(punishment);
+            parent.getParent().addPunishment(punishment);
+            parent.getParent().repaint();
+            parent.dispose();
         }
     }
 

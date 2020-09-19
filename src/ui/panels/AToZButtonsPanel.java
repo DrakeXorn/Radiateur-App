@@ -27,8 +27,8 @@ public class AToZButtonsPanel extends JPanel {
             });
 
             button.addActionListener(new LetterButtonListener());
-            this.add(button);
-            this.setVisible(true);
+            add(button);
+            setVisible(true);
         }
 
     }

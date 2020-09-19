@@ -19,11 +19,11 @@ public class InputWantedPlayerFrame extends JFrame {
         setVisible(true);
         setLayout(new BorderLayout());
         setResizable(false);
-        add(this.panel, BorderLayout.CENTER);
+        add(panel, BorderLayout.CENTER);
         setIconImage(parent.getIconImage());
     }
 
     public MainWindow getParentWindow() {
-        return this.parent;
+        return parent;
     }
 }

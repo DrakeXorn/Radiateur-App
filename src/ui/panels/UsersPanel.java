@@ -25,10 +25,10 @@ public class UsersPanel extends JPanel {
     public UsersPanel(MainWindow parent) {
         UsersController controller = new UsersController();
         this.parent = parent;
-        this.setLayout(new BorderLayout());
+        setLayout(new BorderLayout());
 
         try {
-            this.setUsers(controller.getAllUsers());
+            setUsers(controller.getAllUsers());
         } catch (GetAllDataException | CredentialsNotSetException exception) {
             JOptionPane.showMessageDialog(this, exception.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
         }
@@ -57,25 +57,29 @@ public class UsersPanel extends JPanel {
     }
 
     public ArrayList<User> getSelectedItems() {
-        ArrayList<User> res = new ArrayList<>();
+        ArrayList<User> users = new ArrayList<>();
 
         for (int iRow = 0; iRow < usersTable.getSelectedRows().length; iRow++) {
-            res.add(model.getRow(usersTable.getSelectedRows()[iRow]));
+            users.add(model.getRow(usersTable.getSelectedRows()[iRow]));
         }
 
-        return res;
+        return users;
+    }
+
+    public ArrayList<User> getAllUsers() {
+        return model.getContents();
     }
 
     private static class BodyRenderer implements TableCellRenderer {
         DefaultTableCellRenderer renderer;
 
         public BodyRenderer(JTable table) {
-            this.renderer = (DefaultTableCellRenderer)table.getDefaultRenderer(Integer.class);
+            renderer = (DefaultTableCellRenderer)table.getDefaultRenderer(Integer.class);
         }
 
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int col) {
-            this.renderer.setHorizontalAlignment(2);
-            return this.renderer.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, col);
+            renderer.setHorizontalAlignment(2);
+            return renderer.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, col);
         }
     }
 
@@ -88,6 +92,7 @@ public class UsersPanel extends JPanel {
 
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int col) {
             renderer.setHorizontalAlignment(!table.getColumn(value).getHeaderValue().equals("Est whitelisté ?") && !table.getColumn(value).getHeaderValue().equals("Est banni ?") ? 2 : 0);
+
             return renderer.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, col);
         }
     }

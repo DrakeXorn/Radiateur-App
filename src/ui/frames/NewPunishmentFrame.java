@@ -20,7 +20,7 @@ public class NewPunishmentFrame extends JFrame {
         setResizable(false);
 
         panel = new NewPunishmentPanel(this);
-        add(this.panel, "Center");
+        add(panel, "Center");
 
         this.parent = parent;
 

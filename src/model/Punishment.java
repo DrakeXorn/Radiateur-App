@@ -30,7 +30,7 @@ public class Punishment {
     }
 
     public void setIsNewlyCreated() {
-        this.isNewlyCreated = true;
+        isNewlyCreated = true;
     }
 
     public void setPunishmentEndTime(Date punishmentEndTime) {
@@ -58,10 +58,10 @@ public class Punishment {
     }
 
     public boolean isNewlyCreated() {
-        return this.isNewlyCreated;
+        return isNewlyCreated;
     }
 
     public String toString() {
-        return punishmentType + " par " + operator + (punishmentEndTime.getTime() == -1L ? " de manière permanente" : " pendant " + Duration.between(punishmentStartTime.toInstant(), punishmentEndTime.toInstant()).toMinutes()) + " minutes. Raison : " + this.reason + ".";
+        return punishmentType + " par " + operator + (punishmentEndTime.getTime() == -1L ? " de manière permanente" : " pendant " + Duration.between(punishmentStartTime.toInstant(), punishmentEndTime.toInstant()).toMinutes()) + " minutes. Raison : " + reason + ".";
     }
 }

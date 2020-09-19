@@ -27,7 +27,7 @@ public class PlayerInfoFrame extends JFrame {
 
         setLayout(new BorderLayout());
         container = getContentPane();
-        container.add(new PlayerInfoPanel(this, this.headIcon, player), BorderLayout.CENTER);
+        container.add(new PlayerInfoPanel(this, headIcon, player), BorderLayout.CENTER);
 
         this.parent = parent;
 

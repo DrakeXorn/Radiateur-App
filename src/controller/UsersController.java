@@ -2,6 +2,7 @@ package controller;
 
 import business.UsersManager;
 import model.User;
+import model.exceptions.AddDataException;
 import model.exceptions.CredentialsNotSetException;
 import model.exceptions.GetAllDataException;
 import model.exceptions.UpdateDataException;
@@ -19,5 +20,9 @@ public class UsersController {
 
     public void updateUser(User user) throws UpdateDataException, CredentialsNotSetException {
         manager.updateUser(user);
+    }
+
+    public void addUser(String usernameToAdd) throws AddDataException, CredentialsNotSetException {
+        manager.addUser(usernameToAdd);
     }
 }

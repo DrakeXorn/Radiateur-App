@@ -2,6 +2,7 @@ package ui.panels;
 
 import controller.UsersController;
 import model.User;
+import model.exceptions.AddDataException;
 import model.exceptions.CredentialsNotSetException;
 import model.exceptions.UpdateDataException;
 import ui.frames.InputWantedPlayerFrame;
@@ -42,6 +43,7 @@ public class UsersButtonsPanel extends JPanel {
         addButton = new JButton("Ajouter un joueur");
         addButton.setEnabled(false);
         addButton.setMnemonic(KeyEvent.VK_J);
+        addButton.addActionListener(new AddToWhiteistButtonListener());
         add(addButton);
 
         addToWhitelistButton = new JButton("Whitelister la sélection");
@@ -54,13 +56,13 @@ public class UsersButtonsPanel extends JPanel {
         removeFromWhitelistButton.setMnemonic(KeyEvent.VK_D);
         removeFromWhitelistButton.setEnabled(false);
         removeFromWhitelistButton.addActionListener(new RemoveFromWhitelistButtonListener());
-        add(this.removeFromWhitelistButton);
+        add(removeFromWhitelistButton);
 
         seeInfoButton = new JButton("Voir les informations");
         seeInfoButton.addActionListener(new SeeInfoButtonListener());
         seeInfoButton.setEnabled(false);
         seeInfoButton.setMnemonic(KeyEvent.VK_I);
-        add(this.seeInfoButton);
+        add(seeInfoButton);
 
         add(new JLabel(""));
     }
@@ -86,7 +88,7 @@ public class UsersButtonsPanel extends JPanel {
                     UsersController controller = new UsersController();
                     controller.updateUser(user);
                 } catch (UpdateDataException | CredentialsNotSetException exception) {
-                    JOptionPane.showMessageDialog(this.parent, exception.getMessage(), "Erreur lors de la mise à jour de " + user, JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(parent, exception.getMessage(), "Erreur lors de la mise à jour de " + user, JOptionPane.ERROR_MESSAGE);
                 }
             }
         }
@@ -97,7 +99,7 @@ public class UsersButtonsPanel extends JPanel {
     private class SearchUserListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            new InputWantedPlayerFrame(UsersButtonsPanel.this.parent);
+            new InputWantedPlayerFrame(parent);
         }
     }
 
@@ -108,6 +110,26 @@ public class UsersButtonsPanel extends JPanel {
             addButton.setEnabled(true);
         }
     }
+
+    private class AddToWhiteistButtonListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String usernameToAdd = JOptionPane.showInputDialog(parent, "Quel est le pseudo à ajouter ?");
+
+            if (!usernameToAdd.isEmpty()) {
+                if (parent.getAllUsers().stream().noneMatch(user -> user.getUsername().equalsIgnoreCase(usernameToAdd))) {
+                    UsersController controller = new UsersController();
+
+                    try {
+                        controller.addUser(usernameToAdd);
+                    } catch (AddDataException | CredentialsNotSetException exception) {
+                        JOptionPane.showMessageDialog(parent, exception.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
+                    }
+                } else JOptionPane.showMessageDialog(parent, "Vous ne pouvez pas ajouter un utilisateur déjà présent dans la liste !", "Attention", JOptionPane.WARNING_MESSAGE);
+            }
+        }
+    }
+
 
     private class AddToWhitelistButtonListener implements ActionListener {
         @Override

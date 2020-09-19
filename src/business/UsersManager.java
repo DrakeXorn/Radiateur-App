@@ -3,6 +3,7 @@ package business;
 import dataAccess.IPlayerAccess;
 import dataAccess.UsersDBAccess;
 import model.User;
+import model.exceptions.AddDataException;
 import model.exceptions.CredentialsNotSetException;
 import model.exceptions.GetAllDataException;
 import model.exceptions.UpdateDataException;
@@ -10,7 +11,7 @@ import model.exceptions.UpdateDataException;
 import java.util.ArrayList;
 
 public class UsersManager {
-    public IPlayerAccess playerAccessor = new UsersDBAccess();
+    private IPlayerAccess playerAccessor = new UsersDBAccess();
 
     public UsersManager() {}
 
@@ -19,6 +20,10 @@ public class UsersManager {
     }
 
     public void updateUser(User user) throws UpdateDataException, CredentialsNotSetException {
-        this.playerAccessor.updateUser(user);
+        playerAccessor.updateUser(user);
+    }
+
+    public void addUser(String usernameToAdd) throws AddDataException, CredentialsNotSetException {
+        playerAccessor.addUser(usernameToAdd);
     }
 }

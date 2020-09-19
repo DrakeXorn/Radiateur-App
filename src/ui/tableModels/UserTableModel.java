@@ -19,6 +19,10 @@ public class UserTableModel extends AbstractTableModel {
         contents = users;
     }
 
+    public ArrayList<User> getContents() {
+        return contents;
+    }
+
     public User getRow(int row) {
         return contents.get(row);
     }

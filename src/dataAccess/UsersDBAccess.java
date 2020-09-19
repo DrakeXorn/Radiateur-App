@@ -2,10 +2,7 @@ package dataAccess;
 
 import model.Punishment;
 import model.User;
-import model.exceptions.CredentialsNotSetException;
-import model.exceptions.CryptoException;
-import model.exceptions.GetAllDataException;
-import model.exceptions.UpdateDataException;
+import model.exceptions.*;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -21,6 +18,7 @@ import java.util.Date;
 public class UsersDBAccess implements IPlayerAccess {
     public UsersDBAccess() {}
 
+    @Override
     public ArrayList<User> getAllUsers() throws CredentialsNotSetException, GetAllDataException {
         ArrayList<User> users = new ArrayList<>();
 
@@ -71,6 +69,7 @@ public class UsersDBAccess implements IPlayerAccess {
         setNewPunishmentStatement.executeUpdate();
     }
 
+    @Override
     public void updateUser(User user) throws CredentialsNotSetException, UpdateDataException {
         try {
             Connection dbConnection = DBConnection.getInstance();
@@ -92,5 +91,18 @@ public class UsersDBAccess implements IPlayerAccess {
         } catch (IOException | SQLException | ParserConfigurationException | CryptoException | SAXException exception) {
             throw new UpdateDataException(user.getUsername(), exception.getMessage());
         }
+    }
+
+    @Override
+    public void addUser(String usernameToAdd) throws CredentialsNotSetException, AddDataException {
+        try {
+            Connection dbConnection = DBConnection.getInstance();
+
+
+        } catch (IOException | SQLException | ParserConfigurationException | CryptoException | SAXException exception) {
+            throw new AddDataException("l'utilisateur " + usernameToAdd, exception.getMessage());
+        }
+
+
     }
 }

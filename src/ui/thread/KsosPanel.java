@@ -43,7 +43,7 @@ public class KsosPanel extends JPanel {
     private class MouseOverImageListener extends MouseAdapter {
         @Override
         public void mouseClicked(MouseEvent e) {
-            if (e.getX() >= KsosPanel.this.getParent().getWidth() / 2 - KsosPanel.this.ksosImg.getWidth(KsosPanel.this) / 2 &&
+            if (e.getX() >= getParent().getWidth() / 2 - ksosImg.getWidth(KsosPanel.this) / 2 &&
                     e.getX() <= getParent().getWidth() / 2 + ksosImg.getWidth(KsosPanel.this) / 2 &&
                     e.getY() >= getParent().getHeight() / 2 - ksosImg.getHeight(KsosPanel.this) / 2 - 20 &&
                     e.getY() <= getParent().getHeight() / 2 + ksosImg.getHeight(KsosPanel.this) / 2 - 20) {

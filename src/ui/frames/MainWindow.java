@@ -1,8 +1,10 @@
 package ui.frames;
 
+import business.UsersManager;
 import controller.AppIconController;
 import controller.UsersController;
 import model.User;
+import model.exceptions.AddDataException;
 import model.exceptions.CredentialsNotSetException;
 import model.exceptions.GetAllDataException;
 import ui.panels.AToZButtonsPanel;
@@ -71,7 +73,7 @@ public class MainWindow extends JFrame {
             container.remove(usersPanel);
 
         usersPanel = new UsersPanel(this);
-        container.add(this.usersPanel);
+        container.add(usersPanel);
         repaint();
         setVisible(true);
     }
@@ -98,6 +100,10 @@ public class MainWindow extends JFrame {
 
     public User getSelectedItem() {
         return getSelectedItems().get(0);
+    }
+
+    public ArrayList<User> getAllUsers() {
+        return usersPanel.getAllUsers();
     }
 
     public static void main(String[] args) {
