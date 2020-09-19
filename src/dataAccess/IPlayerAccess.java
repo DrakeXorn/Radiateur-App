@@ -1,15 +1,12 @@
 package dataAccess;
 
 import model.User;
-import model.exceptions.AddDataException;
-import model.exceptions.CredentialsNotSetException;
-import model.exceptions.GetAllDataException;
-import model.exceptions.UpdateDataException;
+import model.exceptions.*;
 
 import java.util.ArrayList;
 
 public interface IPlayerAccess {
     ArrayList<User> getAllUsers() throws CredentialsNotSetException, GetAllDataException;
     void updateUser(User user) throws CredentialsNotSetException, UpdateDataException;
-    void addUser(String usernameToAdd) throws AddDataException, CredentialsNotSetException;
+    void addUser(String usernameToAdd) throws AddDataException, CredentialsNotSetException, MinecraftDataRetrieverException;
 }

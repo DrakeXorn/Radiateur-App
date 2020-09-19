@@ -4,6 +4,7 @@ import controller.UsersController;
 import model.User;
 import model.exceptions.AddDataException;
 import model.exceptions.CredentialsNotSetException;
+import model.exceptions.MinecraftDataRetrieverException;
 import model.exceptions.UpdateDataException;
 import ui.frames.InputWantedPlayerFrame;
 import ui.frames.MainWindow;
@@ -122,9 +123,11 @@ public class UsersButtonsPanel extends JPanel {
 
                     try {
                         controller.addUser(usernameToAdd);
-                    } catch (AddDataException | CredentialsNotSetException exception) {
+                    } catch (AddDataException | CredentialsNotSetException | MinecraftDataRetrieverException exception) {
                         JOptionPane.showMessageDialog(parent, exception.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
                     }
+
+                    parent.setUsersTable();
                 } else JOptionPane.showMessageDialog(parent, "Vous ne pouvez pas ajouter un utilisateur déjà présent dans la liste !", "Attention", JOptionPane.WARNING_MESSAGE);
             }
         }

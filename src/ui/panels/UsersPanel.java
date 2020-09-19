@@ -45,7 +45,8 @@ public class UsersPanel extends JPanel {
         usersTable.getTableHeader().setReorderingAllowed(false);
         usersTable.setDefaultRenderer(Integer.class, new BodyRenderer(usersTable));
         usersTable.getTableHeader().setDefaultRenderer(new HeaderRenderer(usersTable));
-        usersTable.setSelectionMode(2);
+        usersTable.getTableHeader().setFont(new Font(usersTable.getTableHeader().getFont().getName(), Font.BOLD, usersTable.getTableHeader().getFont().getSize()));
+        usersTable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 
         listSelect = usersTable.getSelectionModel();
         listSelect.addListSelectionListener(new TableRowSelectListener());
@@ -78,7 +79,7 @@ public class UsersPanel extends JPanel {
         }
 
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int col) {
-            renderer.setHorizontalAlignment(2);
+            renderer.setHorizontalAlignment(SwingConstants.CENTER);
             return renderer.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, col);
         }
     }
@@ -91,7 +92,7 @@ public class UsersPanel extends JPanel {
         }
 
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int col) {
-            renderer.setHorizontalAlignment(!table.getColumn(value).getHeaderValue().equals("Est whitelisté ?") && !table.getColumn(value).getHeaderValue().equals("Est banni ?") ? 2 : 0);
+            renderer.setHorizontalAlignment(table.getColumn(value).getHeaderValue().equals("Est whitelisté ?") || table.getColumn(value).getHeaderValue().equals("Nombre de punitions") || table.getColumn(value).getHeaderValue().equals("Est banni ?") ? SwingConstants.CENTER : SwingConstants.LEFT);
 
             return renderer.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, col);
         }

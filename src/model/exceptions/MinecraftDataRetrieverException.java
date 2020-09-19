@@ -1,9 +1,9 @@
 package model.exceptions;
 
-public class SkinRetrieverException extends Exception {
+public class MinecraftDataRetrieverException extends Exception {
     private String exceptionDetails;
 
-    public SkinRetrieverException(String exceptionDetails) {
+    public MinecraftDataRetrieverException(String exceptionDetails) {
         this.exceptionDetails = exceptionDetails;
     }
 

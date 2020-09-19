@@ -1,14 +1,14 @@
 package business;
 
-import dataAccess.utils.SkinRetrievingUtils;
-import model.exceptions.SkinRetrieverException;
+import dataAccess.utils.MinecraftDataRetrievingUtils;
+import model.exceptions.MinecraftDataRetrieverException;
 
 import java.awt.*;
 
 public class PlayerHeadManager {
     public PlayerHeadManager() {}
 
-    public Image getSkinHeadViaUsername(String username) throws SkinRetrieverException {
-        return SkinRetrievingUtils.getSkinHeadViaUsername(username);
+    public Image getSkinHeadViaUsername(String username) throws MinecraftDataRetrieverException {
+        return MinecraftDataRetrievingUtils.getSkinHeadViaUsername(username);
     }
 }

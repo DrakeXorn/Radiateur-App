@@ -2,10 +2,7 @@ package controller;
 
 import business.UsersManager;
 import model.User;
-import model.exceptions.AddDataException;
-import model.exceptions.CredentialsNotSetException;
-import model.exceptions.GetAllDataException;
-import model.exceptions.UpdateDataException;
+import model.exceptions.*;
 
 import java.util.ArrayList;
 
@@ -22,7 +19,7 @@ public class UsersController {
         manager.updateUser(user);
     }
 
-    public void addUser(String usernameToAdd) throws AddDataException, CredentialsNotSetException {
+    public void addUser(String usernameToAdd) throws AddDataException, CredentialsNotSetException, MinecraftDataRetrieverException {
         manager.addUser(usernameToAdd);
     }
 }

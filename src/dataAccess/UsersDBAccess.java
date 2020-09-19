@@ -1,5 +1,6 @@
 package dataAccess;
 
+import dataAccess.utils.MinecraftDataRetrievingUtils;
 import model.Punishment;
 import model.User;
 import model.exceptions.*;
@@ -94,11 +95,18 @@ public class UsersDBAccess implements IPlayerAccess {
     }
 
     @Override
-    public void addUser(String usernameToAdd) throws CredentialsNotSetException, AddDataException {
+    public void addUser(String usernameToAdd) throws CredentialsNotSetException, AddDataException, MinecraftDataRetrieverException {
         try {
             Connection dbConnection = DBConnection.getInstance();
+            String userUUID = MinecraftDataRetrievingUtils.getUserUUID(usernameToAdd);
+            PreparedStatement addUserStatement = dbConnection.prepareStatement("insert into whitelist (uuid, name, whitelisted) values (?, ?, ?);");
 
+            userUUID = userUUID.substring(0, 7) + "-" + userUUID.substring(8, 11) + "-" + userUUID.substring(12, 15) + "-" + userUUID.substring(16, 19) + "-" + userUUID.substring(20, 27);
+            addUserStatement.setString(1, userUUID);
+            addUserStatement.setString(2, usernameToAdd);
+            addUserStatement.setString(3, "true");
 
+            addUserStatement.executeUpdate();
         } catch (IOException | SQLException | ParserConfigurationException | CryptoException | SAXException exception) {
             throw new AddDataException("l'utilisateur " + usernameToAdd, exception.getMessage());
         }

@@ -2,7 +2,7 @@ package ui.frames;
 
 import controller.PlayerHeadController;
 import model.User;
-import model.exceptions.SkinRetrieverException;
+import model.exceptions.MinecraftDataRetrieverException;
 import ui.panels.PlayerInfoPanel;
 
 import javax.swing.*;
@@ -21,7 +21,7 @@ public class PlayerInfoFrame extends JFrame {
         try {
             headIcon = iconController.getSkinHeadViaUsername(player.getUsername());
             setIconImage(headIcon);
-        } catch (SkinRetrieverException exception) {
+        } catch (MinecraftDataRetrieverException exception) {
             JOptionPane.showMessageDialog(this, exception.getMessage(), "Problème de récupération d'icône", JOptionPane.WARNING_MESSAGE);
         }
 

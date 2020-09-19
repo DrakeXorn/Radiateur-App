@@ -13,11 +13,8 @@ import java.sql.SQLException;
 public class DBConnection {
     private static Connection connection;
 
-    public DBConnection() {
-    }
-
     public static Connection getInstance() throws SQLException, CredentialsNotSetException, ParserConfigurationException, CryptoException, SAXException, IOException {
-        if (connection == null) {
+        if (connection == null || !connection.isClosed()) {
             ICredentialsAccess credentialsAccessor = new CredentialsXMLAccess();
             connection = DriverManager.getConnection("jdbc:mariadb://213.32.6.39:3306/s8_minecraft?passwordCharacterEncoding", credentialsAccessor.getUsername(), String.copyValueOf(credentialsAccessor.getPassword()));
         }

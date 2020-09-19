@@ -1,6 +1,6 @@
 package dataAccess.utils;
 
-import model.exceptions.SkinRetrieverException;
+import model.exceptions.MinecraftDataRetrieverException;
 import org.json.JSONObject;
 
 import javax.imageio.ImageIO;
@@ -14,11 +14,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Base64;
 
-public class SkinRetrievingUtils {
+public class MinecraftDataRetrievingUtils {
     private static final String USERID_LNK = "https://api.mojang.com/users/profiles/minecraft/";
     private static final String USERINFO_LNK = "https://sessionserver.mojang.com/session/minecraft/profile/";
-
-    public SkinRetrievingUtils() {}
 
     private static String readAll(Reader rd) throws IOException {
         StringBuilder res = new StringBuilder();
@@ -31,8 +29,8 @@ public class SkinRetrievingUtils {
         return res.toString();
     }
 
-    public static Image getSkinHeadViaUsername(String username) throws SkinRetrieverException {
-        Image skin = null;
+    public static String getUserUUID(String username) throws MinecraftDataRetrieverException {
+        String uuid = null;
 
         try {
             URL userIdURL = new URL("https://api.mojang.com/users/profiles/minecraft/" + username);
@@ -46,18 +44,24 @@ public class SkinRetrievingUtils {
                 BufferedReader userIdResponse = new BufferedReader(new InputStreamReader(userIdConnection.getInputStream()));
                 JSONObject json = new JSONObject(readAll(userIdResponse));
 
-                skin = getSkinHeadViaUUID(json.getString("id"));
+                if (!json.has("error"))
+                    uuid = json.getString("id");
+                else throw new MinecraftDataRetrieverException("L'utilisateur n'existe pas.");
             }
 
             userIdConnection.disconnect();
         } catch (IOException exception) {
-            throw new SkinRetrieverException(exception.getMessage());
+            throw new MinecraftDataRetrieverException(exception.getMessage());
         }
 
-        return skin;
+        return uuid;
     }
 
-    public static Image getSkinHeadViaUUID(String uuid) throws SkinRetrieverException {
+    public static Image getSkinHeadViaUsername(String username) throws MinecraftDataRetrieverException {
+        return getSkinHeadViaUUID(getUserUUID(username));
+    }
+
+    public static Image getSkinHeadViaUUID(String uuid) throws MinecraftDataRetrieverException {
         BufferedImage skin = null;
 
         try {
@@ -78,7 +82,7 @@ public class SkinRetrievingUtils {
 
             userInfoConnection.disconnect();
         } catch (Exception exception) {
-            throw new SkinRetrieverException(exception.getMessage());
+            throw new MinecraftDataRetrieverException(exception.getMessage());
         }
 
         return skin;

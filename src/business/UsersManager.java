@@ -3,10 +3,7 @@ package business;
 import dataAccess.IPlayerAccess;
 import dataAccess.UsersDBAccess;
 import model.User;
-import model.exceptions.AddDataException;
-import model.exceptions.CredentialsNotSetException;
-import model.exceptions.GetAllDataException;
-import model.exceptions.UpdateDataException;
+import model.exceptions.*;
 
 import java.util.ArrayList;
 
@@ -23,7 +20,7 @@ public class UsersManager {
         playerAccessor.updateUser(user);
     }
 
-    public void addUser(String usernameToAdd) throws AddDataException, CredentialsNotSetException {
+    public void addUser(String usernameToAdd) throws AddDataException, CredentialsNotSetException, MinecraftDataRetrieverException {
         playerAccessor.addUser(usernameToAdd);
     }
 }

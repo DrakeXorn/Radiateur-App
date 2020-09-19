@@ -61,7 +61,7 @@ public class NewPunishmentPanel extends JPanel {
         confirmButton.addActionListener(new ConfirmButtonListener());
         add(confirmButton, "cell 3 4");
 
-        cancelButton = new JButton("Annuler");
+        cancelButton = new JButton(" Annuler ");
         cancelButton.addActionListener(new CancelButtonListener());
         add(cancelButton);
         this.parent = parent;
