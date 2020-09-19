@@ -12,4 +12,8 @@ public class CredentialsManager {
     public void setCredentials(String username, char[] password) throws FileException {
         credentialsAccessor.setCredentials(username, password);
     }
+
+    public boolean credentialsAreSet() {
+        return CredentialsXMLAccess.credentialsAreSet();
+    }
 }

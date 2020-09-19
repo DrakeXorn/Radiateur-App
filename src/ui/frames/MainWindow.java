@@ -1,10 +1,8 @@
 package ui.frames;
 
-import business.UsersManager;
 import controller.AppIconController;
 import controller.UsersController;
 import model.User;
-import model.exceptions.AddDataException;
 import model.exceptions.CredentialsNotSetException;
 import model.exceptions.GetAllDataException;
 import ui.panels.AToZButtonsPanel;
@@ -122,6 +120,10 @@ public class MainWindow extends JFrame {
 
     public JButton getRemoveFromWhitelistButton() {
         return buttonsPanel.getRemoveFromWhitelistButton();
+    }
+
+    public UsersButtonsPanel getButtons() {
+        return buttonsPanel;
     }
 
     private class SetCredentialsListener implements ActionListener {

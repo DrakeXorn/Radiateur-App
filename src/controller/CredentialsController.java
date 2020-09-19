@@ -13,4 +13,8 @@ public class CredentialsController {
     public void setCredentials(String username, char[] password) throws FileException {
         credentialsManager.setCredentials(username, password);
     }
+
+    public boolean areCredentialsSet() {
+        return credentialsManager.credentialsAreSet();
+    }
 }

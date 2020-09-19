@@ -53,15 +53,17 @@ public class UsersPanel extends JPanel {
         scrollPane = new JScrollPane(usersTable);
         add(scrollPane, BorderLayout.CENTER);
 
+        setVisible(true);
         parent.repaint();
         parent.setVisible(true);
+        parent.getButtons().repaint();
     }
 
     public ArrayList<User> getSelectedItems() {
         ArrayList<User> users = new ArrayList<>();
 
-        for (int iRow = 0; iRow < usersTable.getSelectedRows().length; iRow++) {
-            users.add(model.getRow(usersTable.getSelectedRows()[iRow]));
+        for (int index : listSelect.getSelectedIndices()) {
+            users.add(model.getRow(index));
         }
 
         return users;

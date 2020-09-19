@@ -17,6 +17,7 @@ import java.util.Comparator;
 import java.util.Date;
 
 public class UsersDBAccess implements IPlayerAccess {
+    private static boolean isConnectionEstablished = true;
     public UsersDBAccess() {}
 
     @Override
@@ -49,6 +50,7 @@ public class UsersDBAccess implements IPlayerAccess {
                 users.add(user);
             }
         } catch (IOException | SQLException | ParserConfigurationException | CryptoException | SAXException exception) {
+            isConnectionEstablished = false;
             throw new GetAllDataException("joueurs", exception.getMessage());
         }
 
@@ -101,7 +103,7 @@ public class UsersDBAccess implements IPlayerAccess {
             String userUUID = MinecraftDataRetrievingUtils.getUserUUID(usernameToAdd);
             PreparedStatement addUserStatement = dbConnection.prepareStatement("insert into whitelist (uuid, name, whitelisted) values (?, ?, ?);");
 
-            userUUID = userUUID.substring(0, 7) + "-" + userUUID.substring(8, 11) + "-" + userUUID.substring(12, 15) + "-" + userUUID.substring(16, 19) + "-" + userUUID.substring(20, 27);
+            userUUID = userUUID.substring(0, 8) + "-" + userUUID.substring(8, 12) + "-" + userUUID.substring(12, 16) + "-" + userUUID.substring(16, 20) + "-" + userUUID.substring(20);
             addUserStatement.setString(1, userUUID);
             addUserStatement.setString(2, usernameToAdd);
             addUserStatement.setString(3, "true");
@@ -110,7 +112,5 @@ public class UsersDBAccess implements IPlayerAccess {
         } catch (IOException | SQLException | ParserConfigurationException | CryptoException | SAXException exception) {
             throw new AddDataException("l'utilisateur " + usernameToAdd, exception.getMessage());
         }
-
-
     }
 }

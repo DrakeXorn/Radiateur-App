@@ -1,5 +1,6 @@
 package model;
 
+import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.Date;
 
@@ -62,6 +63,7 @@ public class Punishment {
     }
 
     public String toString() {
-        return punishmentType + " par " + operator + (punishmentEndTime.getTime() == -1L ? " de manière permanente" : " pendant " + Duration.between(punishmentStartTime.toInstant(), punishmentEndTime.toInstant()).toMinutes()) + " minutes. Raison : " + reason + ".";
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        return dateFormat.format(punishmentStartTime) + " | " + punishmentType + " par " + operator + (punishmentEndTime.getTime() == -1L ? " de manière permanente" : " pendant " + Duration.between(punishmentStartTime.toInstant(), punishmentEndTime.toInstant()).toMinutes() +  " minutes") + ". Raison : " + reason + ".";
     }
 }

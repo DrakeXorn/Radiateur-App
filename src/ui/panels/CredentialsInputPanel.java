@@ -59,7 +59,7 @@ public class CredentialsInputPanel extends JPanel {
             try {
                 controller.setCredentials(usernameField.getText(), passwordField.getPassword());
                 parent.dispose();
-                JOptionPane.showMessageDialog(parent, "Les identifiants ont bien été ajoutés !", "Succès", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(parent, "Les identifiants ont bien été définis !", "Succès", JOptionPane.INFORMATION_MESSAGE);
             } catch (FileException exception) {
                 JOptionPane.showMessageDialog(parent, exception.getMessage(), "Erreur !", JOptionPane.ERROR_MESSAGE);
             }

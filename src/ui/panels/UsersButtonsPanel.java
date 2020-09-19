@@ -1,5 +1,6 @@
 package ui.panels;
 
+import controller.CredentialsController;
 import controller.UsersController;
 import model.User;
 import model.exceptions.AddDataException;
@@ -107,22 +108,25 @@ public class UsersButtonsPanel extends JPanel {
     private class LoadButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
+            CredentialsController controller = new CredentialsController();
+
             parent.setUsersTable();
-            addButton.setEnabled(true);
+            addButton.setEnabled(controller.areCredentialsSet());
         }
     }
 
     private class AddToWhiteistButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            String usernameToAdd = JOptionPane.showInputDialog(parent, "Quel est le pseudo à ajouter ?");
+            String usernameToAdd = JOptionPane.showInputDialog(parent, "Quel est le pseudo à ajouter ?", "Le pseudo à ajouter ?", JOptionPane.QUESTION_MESSAGE);
 
-            if (!usernameToAdd.isEmpty()) {
+            if (usernameToAdd != null) {
                 if (parent.getAllUsers().stream().noneMatch(user -> user.getUsername().equalsIgnoreCase(usernameToAdd))) {
                     UsersController controller = new UsersController();
 
                     try {
-                        controller.addUser(usernameToAdd);
+                        if (JOptionPane.showConfirmDialog(parent, "Êtes-vous sûr de vouloir ajouter " + usernameToAdd + " ?", "Êtes-vous certain ?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
+                            controller.addUser(usernameToAdd);
                     } catch (AddDataException | CredentialsNotSetException | MinecraftDataRetrieverException exception) {
                         JOptionPane.showMessageDialog(parent, exception.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
                     }

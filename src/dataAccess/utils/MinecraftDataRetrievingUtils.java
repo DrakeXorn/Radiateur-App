@@ -33,7 +33,7 @@ public class MinecraftDataRetrievingUtils {
         String uuid = null;
 
         try {
-            URL userIdURL = new URL("https://api.mojang.com/users/profiles/minecraft/" + username);
+            URL userIdURL = new URL(USERID_LNK + username);
             HttpURLConnection userIdConnection = (HttpURLConnection)userIdURL.openConnection();
 
             userIdConnection.setRequestMethod("GET");
@@ -65,7 +65,7 @@ public class MinecraftDataRetrievingUtils {
         BufferedImage skin = null;
 
         try {
-            URL userInfoURL = new URL("https://sessionserver.mojang.com/session/minecraft/profile/" + uuid);
+            URL userInfoURL = new URL(USERINFO_LNK + uuid);
             HttpURLConnection userInfoConnection = (HttpURLConnection)userInfoURL.openConnection();
 
             userInfoConnection.setRequestMethod("GET");
