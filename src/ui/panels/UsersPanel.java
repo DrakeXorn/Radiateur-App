@@ -11,11 +11,9 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Vector;
 
 public class UsersPanel extends JPanel {
     private JScrollPane scrollPane;
@@ -34,7 +32,6 @@ public class UsersPanel extends JPanel {
         } catch (GetAllDataException | CredentialsNotSetException exception) {
             JOptionPane.showMessageDialog(this, exception.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
         }
-
     }
 
     public void setUsers(ArrayList<User> users) {

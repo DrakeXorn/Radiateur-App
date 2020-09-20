@@ -22,8 +22,8 @@ public class NewPunishmentPanel extends JPanel {
     private JButton confirmButton;
     private JButton cancelButton;
     private NewPunishmentFrame parent;
-    private static final int[] NUMERIC_REPRESENTATIONS = new int[]{15, 30, 60, 120, 180, 240, 1440, 4320, 10080, 20160};
-    private static final String[] LABELS = new String[]{"15 minutes", "30 minutes", "1 heure", "2 heures", "3 heures", "4 heures", "1 jour", "3 jours", "1 semaine", "2 semaines"};
+    private static final int[] NUMERIC_REPRESENTATIONS = new int[]{5, 15, 30, 60, 120, 180, 240, 1440, 4320, 10080, 20160};
+    private static final String[] LABELS = new String[]{"5 minutes", "15 minutes", "30 minutes", "1 heure", "2 heures", "3 heures", "4 heures", "1 jour", "3 jours", "1 semaine", "2 semaines"};
 
     public NewPunishmentPanel(NewPunishmentFrame parent) {
         setLayout(new MigLayout());
